@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prod": "node index.js NODE_ENV=production",
-    "dev": "npx nodemon NODE_ENV=development",
+    "server": "node index.js NODE_ENV=production",
+    "start": "npx nodemon NODE_ENV=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "dexter",
@@ -17,6 +17,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
   }
 }

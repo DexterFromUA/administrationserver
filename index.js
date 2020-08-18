@@ -1,6 +1,11 @@
 const app = require("./app");
 const http = require("http");
 const debug = require("debug")("app:server");
+const { Sequelize } = require("sequelize");
+
+const sequelize = new Sequelize({
+  dialect: "postgres",
+});
 
 const port = normalizePort(process.env.PORT || 80);
 app.set("port", port);
@@ -45,9 +50,15 @@ function onError(error) {
   }
 }
 
-function onListening() {
+async function onListening() {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connect successful");
+  } catch (err) {
+    console.log("Database with err: ", err);
+  }
   var addr = server.address();
-  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  var bind = typeof addr == "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
-  console.log("Listening on " + bind);
+  console.log("Server listening on " + bind);
 }
