@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.get("/api", (req, res) => {
   res.send({message: "API"});
 });
+app.use("/news", require('./routes/news'));
 app.get("*", (req, res) => {
   res.send({message: "This is REST API server :("});
 });
