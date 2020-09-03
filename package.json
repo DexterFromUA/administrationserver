@@ -18,8 +18,12 @@
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.1",
+    "passport-instagram": "^1.0.0",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
+    "request": "^2.88.2",
     "sequelize": "^6.3.4"
   }
 }
