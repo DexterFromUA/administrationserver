@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 
 router.get("/", (req, res) => {
   res.redirect(
-    "https://api.instagram.com/oauth/authorize/?client_id=2690149747939469&redirect_uri=https://about.instagram.com/&scope=user_profile,user_media&response_type=code"
+    "https://api.instagram.com/oauth/authorize/?client_id=2690149747939469&redirect_uri=https://about.instagram.com/&scope=user_profile&response_type=code"
   );
 });
 router.post("/callback", (req, res) => {
@@ -23,28 +23,14 @@ router.post("/callback", (req, res) => {
     (error, response, body) => {
       if (!error && response.statusCode == 200) {
         const { access_token, user_id } = JSON.parse(body);
-        // fetch(
-        //   `https://graph.instagram.com/me?fields=id,username&access_token=${access_token}`
-        // )
-        //   .then((fetchRes) => fetchRes.json())
-        //   .then((fetchRes) => {
-        //     fetchRes.access_token = access_token;
-        //     console.log("INSTA RES: ", fetchRes);
-        //     res.send(fetchRes);
-        //     return fetchRes;
-        //   })
-        //   .catch(() => console.error("error"));
-
-        // const username = await fetch(
-        //   `https://graph.instagram.com/me?fields=id,username&access_token=${access_token}`
-        // );
-        // const result = JSON.parse(username);
-        console.log("Token:", access_token);
-        console.log("ID:", user_id);
-        res.status(200).send({ access_token: access_token, id: user_id });
+        fetch(`https://graph.instagram.com/me?fields=id,username&access_token=${access_token}`)
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch(() => console.error('error'))
       }
     }
   );
+  res.end();
 });
 
 module.exports = router;
